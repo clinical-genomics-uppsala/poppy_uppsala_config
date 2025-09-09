@@ -38,7 +38,7 @@
         type: file
         url: file:/projects/wp2/nobackup/Twist_Myeloid/ReferenceFiles/Poppy_references_files/250129_NextSeq/reference_files/design.preprocessed.interval_list
     exon_bed:
-      checksum: 3bdaba040c223337e74f7adc8782c7e8
+      checksum: b9d9b685dabe8f67ca692cdbae45d2dc
       path: poppy_uppsala/Twist_myeloid_coding_exons_added_regions.250904.bed
       type: file
       url: file:/projects/wp2/nobackup/Twist_Myeloid/Bed_files/HG38/Twist_myeloid_coding_exons_added_regions.250904.bed
@@ -177,7 +177,7 @@
         type: file
         url: file:/projects/wp2/nobackup/Twist_Myeloid/ReferenceFiles/Poppy_references_files/250129_NovaSeq/reference_files/svdb_cnv.vcf
       nextseq:
-        checksum: 390ec957191d180c93aa7c3df4e4eee9
+        checksum: bb67b442381eaed1dc86ff8a8e3ec807
         path: poppy_uppsala/NovaSeq/svdb_cnv.vcf
         type: file
         url: file:/projects/wp2/nobackup/Twist_Myeloid/ReferenceFiles/Poppy_references_files/250129_NextSeq/reference_files/svdb_cnv.vcf
