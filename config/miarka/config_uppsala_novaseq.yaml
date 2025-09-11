@@ -1,10 +1,6 @@
 ---
 
-# POPPY_SRC: ... # path to cloned poppy here (in correct version)
-
-# PIPELINE_VERSION: v0.2.1
-
-REFERENCE_DATA: /proj/ngi2024001/nobackup/bin/wp2_tm/design_and_ref_files # Create poppy_uppsala dir in /proj/ngi2024001/nobackup/bin/wp2_tm/design_and_ref_files
+REFERENCE_DATA: /proj/ngi2024001/nobackup/bin/wp2_tm/design_and_ref_files
 
 APPTAINER_CACHE: /proj/ngi2024001/nobackup/bin/wp2_tm/{{TAG_OR_BRANCH}}/apptainer_cache
 
