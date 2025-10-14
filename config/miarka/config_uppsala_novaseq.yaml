@@ -15,7 +15,7 @@ default_container: '{{APPTAINER_CACHE}}/hydragenetics__common_1.11.1.sif'
 
 modules:
   alignment: v0.5.1
-  annotation: v1.0.0
+  annotation: v1.2.0
   cnv_sv: "1aa9a68" # v0.5.0
   filtering: v0.3.0
   prealignment: v1.2.0
@@ -296,9 +296,9 @@ merge_cnv_json:
   annotations:
     - "{{REFERENCE_DATA}}/poppy_uppsala/Twist_myeloid_cnv_annotation.240227.bed"
   germline_vcf: snv_indels/bcbio_variation_recall_ensemble/{sample}_{type}.ensembled.vep_annotated.filter.germline.vcf.gz
-  filtered_cnv_vcfs:
+  filtered_cnv_vcf:
     - cnv_sv/svdb_query/{sample}_{type}.{tc_method}.svdb_query.annotate_cnv.cnv_genes.filter.cnv_hard_filter.vcf.gz
-  unfiltered_cnv_vcfs:
+  unfiltered_cnv_vcf:
     - cnv_sv/svdb_query/{sample}_{type}.{tc_method}.svdb_query.annotate_cnv.cnv_genes.vcf.gz
 
 mosdepth_bed:

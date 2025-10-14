@@ -77,7 +77,7 @@
         url: file:/projects/wp2/nobackup/Twist_Myeloid/ReferenceFiles/Poppy_references_files/250129_NextSeq/reference_files/background_panel.tsv
     mappability:
       checksum: 308e59e51c74f664cdd9552ce58a5364
-      path: poppy_uppsala/cnvkit/access-10kb.mm10.bed
+      path: poppy_uppsala/access-10kb.mm10.bed
       type: file
       url: file:/data/ref_genomes/GRCh38/cnvkit/access-10kb.mm10.bed
 
@@ -108,19 +108,19 @@
       url: file:/projects/wp2/nobackup/Twist_Myeloid/Bed_files/HG38/Myeloid_genes_for_xlsx.250114.sorted.bed
     hotspot:
       checksum: ecc9516c697e12e990c760e74c5a4261
-      path: poppy_uppsala/hotspot_genes_for_xlsx.250114.sorted.bed
+      path: poppy_uppsala/hotspot_genes_for_xlsx.250602.sorted.bed
       type: file
       url: file:/projects/wp2/nobackup/Twist_Myeloid/Bed_files/HG38/hotspot_genes_for_xlsx.250602.sorted.bed
 
   cnvkit_batch:
     novaseq:
       checksum: 458257f896444afaebbf133f30c8f670
-      path: poppy_uppsala/NovaSeq/cnvkit/cnvkit.PoN.cnn
+      path: poppy_uppsala/NovaSeq/cnvkit.PoN.cnn
       type: file
       url: file:/projects/wp2/nobackup/Twist_Myeloid/ReferenceFiles/Poppy_references_files/250129_NovaSeq/reference_files/cnvkit.PoN.cnn
     nextseq:
       checksum: 053d2bf91ac36ff51dafbf904a064c7a
-      path: poppy_uppsala/NextSeq/cnvkit/cnvkit.PoN.cnn
+      path: poppy_uppsala/NextSeq/cnvkit.PoN.cnn
       type: file
       url: file:/projects/wp2/nobackup/Twist_Myeloid/ReferenceFiles/Poppy_references_files/250129_NextSeq/reference_files/cnvkit.PoN.cnn
 
@@ -148,6 +148,13 @@
       path: poppy_uppsala/Twist_myeloid_cnv_annotation.240227.bed
       type: file
       url: file:/projects/wp2/nobackup/Twist_Myeloid/Bed_files/HG38/Twist_myeloid_cnv_annotation.240227.bed
+
+  pindel_call:
+    include_bed:
+      checksum: e700af9e5e5a803e85a454b19bd11b36
+      path: poppy_uppsala/Twist_myeloid_pindel_240628.bed
+      type: file
+      url: file:/projects/wp2/nobackup/Twist_Myeloid/Bed_files/HG38/Twist_myeloid_pindel_240628.bed
 
   purecn_coverage:
     intervals:
