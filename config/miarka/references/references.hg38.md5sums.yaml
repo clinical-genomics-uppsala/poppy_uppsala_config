@@ -18,14 +18,14 @@
       url: file:/beegfs-storage/data/ref_genomes/GRCh38/GRCmasked/GCA_000001405.15_GRCh38_no_alt_analysis_set_GRCmasked.dict
     design_bed:
       checksum: d5c5681f4cddf6a3bbf906ac5317187e
-      path: poppy_uppsala/Twist_myeloid_TE-96463385_hg38_241211.bed
+      path: poppy_uppsala/Twist_myeloid_TE-96463385_hg38_251003.bed
       type: file
-      url: file:/projects/wp2/nobackup/Twist_Myeloid/Bed_files/HG38/Twist_myeloid_TE-96463385_hg38_241211.bed
+      url: file:/projects/wp2/nobackup/Twist_Myeloid/Bed_files/HG38/Twist_myeloid_TE-96463385_hg38_251003.bed
     design_intervals:
       checksum: 16e86be1ddbbe979d606683abba19d7d
-      path: poppy_uppsala/Twist_myeloid_TE-96463385_hg38_241211.interval_list
+      path: poppy_uppsala/Twist_myeloid_TE-96463385_hg38_251003.interval_list
       type: file
-      url: file:/projects/wp2/nobackup/Twist_Myeloid/Bed_files/HG38/Twist_myeloid_TE-96463385_hg38_241211.interval_list
+      url: file:/projects/wp2/nobackup/Twist_Myeloid/Bed_files/HG38/Twist_myeloid_TE-96463385_hg38_251003.interval_list
     design_intervals_gatk_cnv:
       novaseq:
         checksum: 83469cb0efb00eb813d1654924ee99c1
@@ -39,9 +39,9 @@
         url: file:/projects/wp2/nobackup/Twist_Myeloid/ReferenceFiles/Poppy_references_files/250129_NextSeq/reference_files/design.preprocessed.interval_list
     exon_bed:
       checksum: b9d9b685dabe8f67ca692cdbae45d2dc
-      path: poppy_uppsala/Twist_myeloid_coding_exons_added_regions.250904.bed
+      path: poppy_uppsala/Twist_myeloid_coding_exons_added_regions.251003.bed
       type: file
-      url: file:/projects/wp2/nobackup/Twist_Myeloid/Bed_files/HG38/Twist_myeloid_coding_exons_added_regions.250904.bed
+      url: file:/projects/wp2/nobackup/Twist_Myeloid/Bed_files/HG38/Twist_myeloid_coding_exons_added_regions.251003.bed
     artifacts:
       novaseq:
         checksum: 30597e9b82caa51e89f49530a234280a
