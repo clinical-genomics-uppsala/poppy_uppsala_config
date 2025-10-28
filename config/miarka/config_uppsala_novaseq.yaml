@@ -20,7 +20,7 @@ modules:
   prealignment: v1.2.0
   qc: v0.4.1
   reports: v0.3.1
-  snv_indels: v1.1.0
+  snv_indels_uppsala: v1.1.0
 
 
 reference:
@@ -234,7 +234,7 @@ bwa_mem:
   bwt: "{{REFERENCE_DATA}}/poppy_uppsala/GCA_000001405.15_GRCh38_no_alt_analysis_set_GRCmasked.fasta.bwt"
   pac: "{{REFERENCE_DATA}}/poppy_uppsala/GCA_000001405.15_GRCh38_no_alt_analysis_set_GRCmasked.fasta.pac"
   sa: "{{REFERENCE_DATA}}/poppy_uppsala/GCA_000001405.15_GRCh38_no_alt_analysis_set_GRCmasked.fasta.sa"
-  container: '{{APPTAINER_CACHE}}/hydragenetics__bwa_0.7.17.sif'
+  container: '{{APPTAINER_CACHE}}/hydragenetics__bwa_mem_0.7.17.sif'
 
 cnv_html_report:
   cytobands: true
@@ -255,7 +255,7 @@ cnvkit_vcf:
   container: '{{APPTAINER_CACHE}}/hydragenetics__cnvkit_0.9.9.sif'
 
 fastp_pe:
-  container: '{{APPTAINER_CACHE}}/hydragenetics__fastpe_0.20.1.sif'
+  container: '{{APPTAINER_CACHE}}/hydragenetics__fastp_0.20.1.sif'
 
 fastqc:
   container: '{{APPTAINER_CACHE}}/hydragenetics__fastqc_0.11.9.sif'
