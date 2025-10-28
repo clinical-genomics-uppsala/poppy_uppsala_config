@@ -397,7 +397,7 @@ vardict:
 
 vep:
   vep_cache: "{{REFERENCE_DATA}}/poppy_uppsala/VEP"
-  container: '{{APPTAINER_CACHE}}/ensemblorg__ensembl-vep_release_111.sif'
+  container: '{{APPTAINER_CACHE}}/hydragenetics__vep_111.0.sif'
   mode: "--offline --cache --merged "
   extra: " --assembly GRCh38 --check_existing --pick --variant_class --everything --pick_order mane_select,mane_plus_clinical,canonical,biotype,rank,appris,tsl,ccds,length,ensembl,refseq"
 
