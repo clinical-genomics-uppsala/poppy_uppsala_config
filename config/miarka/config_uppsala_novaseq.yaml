@@ -22,7 +22,6 @@ modules:
   reports: v0.3.1
   snv_indels_uppsala: v1.1.0
 
-
 reference:
   fasta: "{{REFERENCE_DATA}}/poppy_uppsala/GCA_000001405.15_GRCh38_no_alt_analysis_set_GRCmasked.fasta"
   fai: "{{REFERENCE_DATA}}/poppy_uppsala/GCA_000001405.15_GRCh38_no_alt_analysis_set_GRCmasked.fasta.fai"
