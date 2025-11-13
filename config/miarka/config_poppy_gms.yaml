@@ -1,38 +1,41 @@
 ---
+
 REFERENCE_DATA: /proj/ngi2024001/nobackup/bin/wp2_tm/design_and_ref_files
 
 APPTAINER_CACHE: /proj/ngi2024001/nobackup/bin/wp2_tm/apptainer_cache
 
 hydra_local_path: /proj/ngi2024001/nobackup/bin/wp2_tm/{{TAG_OR_BRANCH}}/hydra-genetics
 
-resources: "{{POPPY_UU_HOME}}/config/resources.yaml"
+resources: "{{POPPY_HOME}}/config/resources.yaml"
 samples: "samples.tsv"
 units: "units.tsv"
-output: "{{POPPY_UU_HOME}}/config/output_files.yaml"
+output: "{{POPPY_HOME}}/config/output_files.yaml"
 
 default_container: '{{APPTAINER_CACHE}}/hydragenetics__common_1.10.2.sif'
+
+trimmer_software: "fastp_pe"
 
 modules:
   alignment: v0.5.1
   annotation: v1.0.0
-  cnv_sv: "1aa9a68" # v0.5.0
+  cnv_sv: "1aa9a68"
   filtering: v0.3.0
   prealignment: v1.2.0
   qc: v0.4.1
   reports: v0.3.1
-  snv_indels_uppsala: v1.1.0
+  snv_indels_gms: v0.6.0
 
 reference:
   fasta: "{{REFERENCE_DATA}}/poppy_uppsala/GCA_000001405.15_GRCh38_no_alt_analysis_set_GRCmasked.fasta"
   fai: "{{REFERENCE_DATA}}/poppy_uppsala/GCA_000001405.15_GRCh38_no_alt_analysis_set_GRCmasked.fasta.fai"
   dict: "{{REFERENCE_DATA}}/poppy_uppsala/GCA_000001405.15_GRCh38_no_alt_analysis_set_GRCmasked.dict"
-  exon_bed: "{{REFERENCE_DATA}}/poppy_uppsala/Twist_myeloid_coding_exons_added_regions.251003.bed"
+  exon_bed: "{{REFERENCE_DATA}}/poppy_uppsala/Twist_myeloid_coding_exons_added_regions.250904.bed"
   design_bed: "{{REFERENCE_DATA}}/poppy_uppsala/Twist_myeloid_TE-96463385_hg38_251003.bed"
   design_intervals: "{{REFERENCE_DATA}}/poppy_uppsala/Twist_myeloid_TE-96463385_hg38_251003.interval_list" #hsmetrics
-  design_intervals_gatk_cnv: "{{REFERENCE_DATA}}/poppy_uppsala/NovaSeq/design.preprocessed.interval_list"
-  artifacts: "{{REFERENCE_DATA}}/poppy_uppsala/NovaSeq/artifact_panel.tsv"
-  artifacts_pindel: "{{REFERENCE_DATA}}/poppy_uppsala/NovaSeq/artifact_panel_pindel.tsv"
-  background: "{{REFERENCE_DATA}}/poppy_uppsala/NovaSeq/background_panel.tsv"
+  design_intervals_gatk_cnv: "{{REFERENCE_DATA}}/poppy_uppsala/NextSeq/design.preprocessed.interval_list"
+  artifacts: "{{REFERENCE_DATA}}/poppy_uppsala/NextSeq/artifact_panel.tsv"
+  artifacts_pindel: "{{REFERENCE_DATA}}/poppy_uppsala/NextSeq/artifact_panel_pindel.tsv"
+  background: "{{REFERENCE_DATA}}/poppy_uppsala/NextSeq/background_panel.tsv"
   skip_chrs:
     - "chrM"
     - "chr1_KI270706v1_random"
@@ -209,23 +212,14 @@ reference:
 annotate_cnv:
   cnv_genes: "{{REFERENCE_DATA}}/poppy_uppsala/Twist_myeloid_cnv_annotation.240227.bed"
 
-bamsnap:
-  extra: " -coverage_vaf 0.05 -show_soft_clipped -read_thickness 2 -read_gap_height 1 "
-  container: "{{APPTAINER_CACHE}}/hydragenetics__bamsnap_0.2.19.sif"
-
 bcbio_variation_recall_ensemble:
   container: '{{APPTAINER_CACHE}}/hydragenetics__bcbio-vc_0.2.6.sif'
+  callers:
+    - gatk_mutect2
+    - vardict
 
 bcftools_annotate:
   annotation_db: "{{REFERENCE_DATA}}/poppy_uppsala/small_exac_common_3.hg38.vcf.gz"
-
-bcftools_concat_vcfs:
-  extra: " -a "
-
-bcftools_filter_include_region:
-  cll: "{{REFERENCE_DATA}}/poppy_uppsala/CLL_genes_for_xlsx.250114.sorted.bed"
-  myeloid: "{{REFERENCE_DATA}}/poppy_uppsala/Myeloid_genes_for_xlsx.250114.sorted.bed"
-  hotspot: "{{REFERENCE_DATA}}/poppy_uppsala/hotspot_genes_for_xlsx.250602.sorted.bed"
 
 bwa_mem:
   amb: "{{REFERENCE_DATA}}/poppy_uppsala/GCA_000001405.15_GRCh38_no_alt_analysis_set_GRCmasked.fasta.amb"
@@ -236,11 +230,11 @@ bwa_mem:
   container: '{{APPTAINER_CACHE}}/hydragenetics__bwa_mem_0.7.17.sif'
 
 cnv_html_report:
-  cytobands: true
+  cytobands: false
   show_table: true
 
 cnvkit_batch:
-  normal_reference: "{{REFERENCE_DATA}}/poppy_uppsala/NovaSeq/cnvkit.PoN.cnn"
+  normal_reference: "{{REFERENCE_DATA}}/poppy_uppsala/NextSeq/cnvkit.PoN.cnn"
   method: hybrid
   container: '{{APPTAINER_CACHE}}/hydragenetics__cnvkit_0.9.9.sif'
 
@@ -248,10 +242,10 @@ cnvkit_call:
   container: '{{APPTAINER_CACHE}}/hydragenetics__cnvkit_0.9.9.sif'
 
 cnvkit_vcf:
+  container: '{{APPTAINER_CACHE}}/hydragenetics__cnvkit_0.9.9.sif'
   hom_del_limit: 0.47
   het_del_limit: 1.68
   dup_limit: 2.3
-  container: '{{APPTAINER_CACHE}}/hydragenetics__cnvkit_0.9.9.sif'
 
 fastp_pe:
   container: '{{APPTAINER_CACHE}}/hydragenetics__fastp_0.20.1.sif'
@@ -260,19 +254,21 @@ fastqc:
   container: '{{APPTAINER_CACHE}}/hydragenetics__fastqc_0.11.9.sif'
 
 filter_vcf:
-  sample_name_regex: ^([A-Za-z0-9-]+_[NRT]\{1\})$
-  germline: "{{POPPY_UU_HOME}}/config/filters/config_hard_filter_germline.yaml"
-  somatic: "{{POPPY_UU_HOME}}/config/filters/config_soft_filter_somatic.yaml"
-  somatic_hard: "{{POPPY_UU_HOME}}/config/filters/config_hard_filter_somatic.yaml"
-  pindel: "{{POPPY_UU_HOME}}/config/filters/config_soft_filter_pindel.yaml"
-  cnv_hard_filter: "{{POPPY_UU_HOME}}/config/filters/config_hard_filter_cnv.yaml"
+  germline: "{{POPPY_HOME}}/config/filters/config_hard_filter_germline.yaml"
+  somatic: "{{POPPY_HOME}}/config/filters/config_soft_filter_somatic.yaml"
+  somatic_hard: "{{POPPY_HOME}}/config/filters/config_hard_filter_somatic.yaml"
+  pindel: "{{POPPY_HOME}}/config/filters/config_soft_filter_pindel.yaml"
+  cnv_hard_filter: "{{POPPY_HOME}}/config/filters/config_hard_filter_cnv.yaml"
 
 gatk_collect_allelic_counts:
   SNP_interval: "{{REFERENCE_DATA}}/poppy_uppsala/Twist_myeloid_cnv100.241211.interval_list"
   container: "{{APPTAINER_CACHE}}/hydragenetics__gatk4_4.1.9.0.sif"
 
 gatk_denoise_read_counts:
-  normal_reference: "{{REFERENCE_DATA}}/poppy_uppsala/NovaSeq/gatk.PoN.hdf5"
+  normal_reference: "{{REFERENCE_DATA}}/poppy_uppsala/NextSeq/gatk.PoN.hdf5"
+  container: "{{APPTAINER_CACHE}}/hydragenetics__gatk4_4.1.9.0.sif"
+
+gatk_collect_read_counts:
   container: "{{APPTAINER_CACHE}}/hydragenetics__gatk4_4.1.9.0.sif"
 
 gatk_model_segments:
@@ -290,11 +286,7 @@ gatk_mutect2_gvcf:
 gatk_mutect2_merge_stats:
   container: "{{APPTAINER_CACHE}}/hydragenetics__gatk4_4.1.9.0.sif"
 
-merge_af_complex_variants:
-  merge_method: "sum"
-
 merge_cnv_json:
-  cytobands: "{{POPPY_UU_HOME}}/config/cytoBand.hg38.txt"
   annotations:
     - "{{REFERENCE_DATA}}/poppy_uppsala/Twist_myeloid_cnv_annotation.240227.bed"
   germline_vcf: snv_indels/bcbio_variation_recall_ensemble/{sample}_{type}.ensembled.vep_annotated.filter.germline.vcf.gz
@@ -305,27 +297,31 @@ merge_cnv_json:
 
 mosdepth_bed:
   container: "{{APPTAINER_CACHE}}/hydragenetics__mosdepth_0.3.2.sif"
+  thresholds: "100,200,1000"
+  extra: " --mapq 20 "
 
 multiqc:
   container: "{{APPTAINER_CACHE}}/hydragenetics__multiqc_1.21.sif"
   reports:
     DNA:
-      config: "{{POPPY_UU_HOME}}/config/config_multiqc.yaml"
+      config: "{{POPPY_HOME}}/config/config_multiqc.yaml"
+      included_unit_types:
+        - T
+        - N
       qc_files:
         - "qc/fastqc/{sample}_{type}_{flowcell}_{lane}_{barcode}_{read}_fastqc.zip"
         - "prealignment/fastp_pe/{sample}_{type}_{flowcell}_{lane}_{barcode}_fastp.json"
-        - "qc/mosdepth_bed_coding/{sample}_{type}.mosdepth.summary.txt"
-        - "qc/mosdepth_bed_coding/{sample}_{type}.per-base.bed.gz"
-        - "qc/mosdepth_bed_coding/{sample}_{type}.mosdepth.region.dist.txt"
-        - "qc/mosdepth_bed_coding/{sample}_{type}.regions.bed.gz"
-        - "qc/mosdepth_bed_coding/{sample}_{type}.thresholds.bed.gz"
+        - "qc/mosdepth_bed/{sample}_{type}.mosdepth.summary.txt"
+        - "qc/mosdepth_bed/{sample}_{type}.per-base.bed.gz"
+        - "qc/mosdepth_bed/{sample}_{type}.mosdepth.region.dist.txt"
+        - "qc/mosdepth_bed/{sample}_{type}.regions.bed.gz"
+        - "qc/mosdepth_bed/{sample}_{type}.thresholds.bed.gz"
         - "qc/picard_collect_hs_metrics/{sample}_{type}.HsMetrics.txt"
-        - "qc/picard_collect_alignment_summary_metrics/{sample}_{type}.alignment_summary_metrics.txt" #inga general stats
+        - "qc/picard_collect_alignment_summary_metrics/{sample}_{type}.alignment_summary_metrics.txt"
         - "qc/picard_collect_duplication_metrics/{sample}_{type}.duplication_metrics.txt"
         - "qc/picard_collect_insert_size_metrics/{sample}_{type}.insert_size_metrics.txt"
         - "qc/picard_collect_gc_bias_metrics/{sample}_{type}.gc_bias.summary_metrics"
         - "qc/samtools_stats/{sample}_{type}.samtools-stats.txt"
-        - "versions/update_poppy.temp"
 
 picard_collect_alignment_summary_metrics:
   container: "{{APPTAINER_CACHE}}/hydragenetics__picard_2.25.0.sif"
@@ -361,32 +357,32 @@ pindel2vcf:
 
 purecn:
   genome: GRCh38
-  normaldb: "{{REFERENCE_DATA}}/poppy_uppsala/NovaSeq/purecn_normal_db.rds"
-  intervals: "{{REFERENCE_DATA}}/poppy_uppsala/NovaSeq/purecn_targets_intervals.txt"
-  mapping_bias_file: "{{REFERENCE_DATA}}/poppy_uppsala/NovaSeq/purecn_mapping_bias.rds"
+  normaldb: "{{REFERENCE_DATA}}/poppy_uppsala/NextSeq/purecn_normal_db.rds"
+  intervals: "{{REFERENCE_DATA}}/poppy_uppsala/NextSeq/purecn_targets_intervals.txt"
+  mapping_bias_file: "{{REFERENCE_DATA}}/poppy_uppsala/NextSeq/purecn_mapping_bias.rds"
   container: "{{APPTAINER_CACHE}}/hydragenetics__purecn_2.2.0.sif"
+  interval_padding: 100
+  segmentation_method: internal
+  fun_segmentation: PSCBS
 
 purecn_coverage:
-  intervals: "{{REFERENCE_DATA}}/poppy_uppsala/NovaSeq/purecn_targets_intervals.txt"
+  intervals: "{{REFERENCE_DATA}}/poppy_uppsala/NextSeq/purecn_targets_intervals.txt"
   container: "{{APPTAINER_CACHE}}/hydragenetics__purecn_2.2.0.sif"
 
-results_report_xlsx:
-  wanted_transcripts: "{{REFERENCE_DATA}}/poppy_uppsala/tm_mane_transcript.240404.txt"
-
 svdb_merge:
-  tc_method:
-    - name: purecn
-      cnv_caller:
-        - cnvkit
-        - gatk
-    - name: pathology
-      cnv_caller:
-        - cnvkit
-        - gatk
   container: "{{APPTAINER_CACHE}}/hydragenetics__svdb_2.6.0.sif"
+  tc_method:
+  - name: purecn
+    cnv_caller:
+      - cnvkit
+      - gatk
+  - name: pathology
+    cnv_caller:
+      - cnvkit
+      - gatk
 
 svdb_query:
-  db_string: "--db {{REFERENCE_DATA}}/poppy_uppsala/NovaSeq/svdb_cnv.vcf --out_frq Normal_AF --out_occ Normal_NovaSeq"
+  db_string: "--db {{REFERENCE_DATA}}/poppy_uppsala/NextSeq/svdb_cnv.vcf --out_frq Normal_AF --out_occ Normal_OCC"
   container: "{{APPTAINER_CACHE}}/hydragenetics__svdb_2.6.0.sif"
 
 vardict:
