@@ -43,4 +43,3 @@ pindel2vcf:
   time: "12:00:00"
   mem_mb: 6144
   mem_per_cpu: 6144
-  partition: core_bkup,core
