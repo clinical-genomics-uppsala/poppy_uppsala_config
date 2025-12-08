@@ -215,7 +215,7 @@ bamsnap:
   container: "{{APPTAINER_CACHE}}/hydragenetics__bamsnap_0.2.19.sif"
 
 bamsnap_downsample_bam:
-  container: '{{APPTAINER_CACHE}}/hydragenetics__common_1.10.2.sif'
+  container: '{{APPTAINER_CACHE}}/hydragenetics__common_3.1.1.2.sif'
   max_reads: 6000000
 
 bcbio_variation_recall_ensemble:
